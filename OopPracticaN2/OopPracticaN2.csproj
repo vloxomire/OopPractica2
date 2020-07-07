@@ -32,10 +32,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ArmyCreator.Funcional.Pmain</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArmyCreator\Funcional\Army.cs" />
+    <Compile Include="ArmyCreator\Funcional\Main.cs" />
+    <Compile Include="ArmyCreator\Funcional\Soldier.cs" />
     <Compile Include="ArmyCreator\Basico\Army.cs" />
     <Compile Include="ArmyCreator\Basico\Main.cs" />
     <Compile Include="ArmyCreator\Basico\Soldier.cs" />
