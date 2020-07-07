@@ -1,0 +1,7 @@
+C:\0-Cursos\C#\OopPractica2\OopPracticaN2\bin\Debug\OopPracticaN2.exe.config
+C:\0-Cursos\C#\OopPractica2\OopPracticaN2\bin\Debug\OopPracticaN2.exe
+C:\0-Cursos\C#\OopPractica2\OopPracticaN2\bin\Debug\OopPracticaN2.pdb
+C:\0-Cursos\C#\OopPractica2\OopPracticaN2\obj\Debug\OopPracticaN2.csprojAssemblyReference.cache
+C:\0-Cursos\C#\OopPractica2\OopPracticaN2\obj\Debug\OopPracticaN2.csproj.CoreCompileInputs.cache
+C:\0-Cursos\C#\OopPractica2\OopPracticaN2\obj\Debug\OopPracticaN2.exe
+C:\0-Cursos\C#\OopPractica2\OopPracticaN2\obj\Debug\OopPracticaN2.pdb
