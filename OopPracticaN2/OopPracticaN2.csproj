@@ -33,12 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ArmyCreator.Funcional.Pmain</StartupObject>
+    <StartupObject>ArmyCreator.Avanzado.Pmain</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArmyCreator\Avanzado\Army.cs" />
+    <Compile Include="ArmyCreator\Avanzado\General.cs" />
+    <Compile Include="ArmyCreator\Avanzado\Main.cs" />
+    <Compile Include="ArmyCreator\Avanzado\Recluta.cs" />
+    <Compile Include="ArmyCreator\Avanzado\Soldier.cs" />
     <Compile Include="ArmyCreator\Funcional\Army.cs" />
     <Compile Include="ArmyCreator\Funcional\Main.cs" />
     <Compile Include="ArmyCreator\Funcional\Soldier.cs" />
