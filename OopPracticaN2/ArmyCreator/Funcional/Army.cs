@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace ArmyCreator.Funcional
 {
     class Army
-    { 
+    {
         private Soldier[] arrayArmy = new Soldier[5];
         private int posicion;
         public Army()
@@ -21,7 +21,7 @@ namespace ArmyCreator.Funcional
             {
                 AgregarSoldado();
                 cont++;
-            } while (cont!=arrayArmy.Length);
+            } while (cont != arrayArmy.Length);
             CalcularFuerza();
         }
         public void AgregarSoldado()
@@ -30,20 +30,20 @@ namespace ArmyCreator.Funcional
             {
                 arrayArmy[GetPosicion()] = new Soldier();
             }
-            
+
             /*Ingresa un nuevo soldado a la primera posición disponible 
              encontrada. De no haber ninguna, no es posible ingresarlo*/
             /*1)Buscar en el array una posicion disponible,
              * 2)si no hay ninguna no se puede ingresar*/
         }
-        private bool BuscarPosicion() 
+        private bool BuscarPosicion()
         {
             for (int i = 0; i < arrayArmy.Length; i++)
             {
                 if (arrayArmy[i] == null)
                 {
                     //getPosicion
-                    SetPosicion( i);
+                    SetPosicion(i);
                     //Console.WriteLine("Hay Lugar en la posicion {0}", i+1);
                     return true;
                 }
@@ -51,11 +51,11 @@ namespace ArmyCreator.Funcional
             Console.WriteLine("\nNo hay lugar en el ejercito");
             return false;
         }
-        public void SetPosicion(int posicion) 
+        public void SetPosicion(int posicion)
         {
             this.posicion = posicion;
         }
-        public int GetPosicion() 
+        public int GetPosicion()
         {
             return posicion;
         }
@@ -65,7 +65,7 @@ namespace ArmyCreator.Funcional
             /*Devuelve la sumatoria de las fuerzas de todos los Soldiers en el army */
             for (int i = 0; i < arrayArmy.Length; i++)
             {
-                fuerzaArmy+=arrayArmy[i].GetFuerza();
+                fuerzaArmy += arrayArmy[i].GetFuerza();
             }
             Console.WriteLine("La fuerza total del ejercito es {0}", fuerzaArmy);
         }

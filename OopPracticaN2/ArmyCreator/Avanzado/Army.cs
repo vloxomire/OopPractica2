@@ -26,7 +26,7 @@ namespace ArmyCreator.Avanzado
             VerArmy();
             CalcularFuerza();
         }
-        public void CreacionArmy() 
+        public void CreacionArmy()
         {
             int valor = 0;
             Console.WriteLine("Su ejercito tiene {0} lugares", indice);
@@ -37,7 +37,7 @@ namespace ArmyCreator.Avanzado
                 {
                     Console.WriteLine("1-recluta/2-soldado/3-General");
                     valor = Convert.ToInt32(Console.ReadLine());
-                } while (valor <1 || valor > 3);
+                } while (valor < 1 || valor > 3);
                 Opciones(valor);
             } while (BuscarPosicion());
             Console.WriteLine("Ejercito Completo");
@@ -48,7 +48,7 @@ namespace ArmyCreator.Avanzado
             {
                 //No puedo sumar el valor del getposition +1
                 arrayArmy[GetPosicion()] = new Soldier();
-                Console.WriteLine("Asignado a la posicion {0}",GetPosicion());
+                Console.WriteLine("Asignado a la posicion {0}", GetPosicion());
             }
         }
         public void AgregarRecluta()
@@ -95,7 +95,7 @@ namespace ArmyCreator.Avanzado
             /*Devuelve la sumatoria de las fuerzas de todos los Soldiers en el army */
             for (int i = 0; i < arrayArmy.Length; i++)
             {
-                fuerzaArmy+=arrayArmy[i].GetFuerza();
+                fuerzaArmy += arrayArmy[i].GetFuerza();
             }
             Console.WriteLine("\nLa fuerza total del ejercito es {0}", fuerzaArmy);
         }
@@ -117,7 +117,7 @@ namespace ArmyCreator.Avanzado
                 Console.Write("-");
             }
         }
-        public void ChequeoMiedo() 
+        public void ChequeoMiedo()
         {
             //Se podra usar el objeto general o recluta para comparar?
             for (int i = 0; i < arrayArmy.Length; i++)
@@ -132,18 +132,18 @@ namespace ArmyCreator.Avanzado
                     {
                         recluta.Miedo(true);
                     }
-                    else 
+                    else
                     {
 
                     }
                 }
-                else 
+                else
                 {
 
                 }
             }
         }
-        public void Opciones(int valor) 
+        public void Opciones(int valor)
         {
             switch (valor)
             {
@@ -162,6 +162,19 @@ namespace ArmyCreator.Avanzado
                 default:
                     break;
             }
+        }
+    }
+    class prueba
+    {
+        private General general;
+        public prueba()
+        {
+            general = new General();
+        }
+        public void Demo()
+        {
+            Console.Write("sin modificador {0}", general.GetFuerza());
+            Console.Write("con modificador {0}", general.GetFuerza()*20) ;
         }
     }
 }
