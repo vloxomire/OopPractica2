@@ -17,7 +17,7 @@ namespace ArmyCreator.Avanzado
             random = new Random();
             MostrarSaludo();
             grafico = 'S';
-            fuerza = random.Next(1,10);
+            fuerza = random.Next(50,100);
         }
         public void VerSoldado() 
         {

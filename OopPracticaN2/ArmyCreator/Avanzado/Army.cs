@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace ArmyCreator.Avanzado
             CreacionArmy();
             VerArmy();
             CalcularFuerza();
-            recluta.Miedo(arrayArmy);
+            Miedo(arrayArmy);
             VerArmy();
             CalcularFuerza();
         }
@@ -137,18 +138,81 @@ namespace ArmyCreator.Avanzado
                     break;
             }
         }
-    }
-    class prueba
-    {
-        private General general;
-        public prueba()
+        public void Miedo(Soldier[] arrayArmy)
         {
-            general = new General();
+            int posicionGrl = 0;
+            if (BuscarGeneral(arrayArmy, ref posicionGrl)) 
+            {
+                for (int i = 0; i < arrayArmy.Length; i++)
+                {
+                    if (arrayArmy[i].GetGrafico() == 'R')
+                    {
+                        if (i + 1 == posicionGrl)
+                        {
+                            recluta = (Recluta)arrayArmy[i];
+                            recluta.SetEstaAsustado(true);
+                            arrayArmy[i] = recluta;
+                            AplicarMiedo(i);
+                        }
+                        else if (i - 1 == posicionGrl)
+                        {
+                            recluta = (Recluta)arrayArmy[i];
+                            recluta.SetEstaAsustado(true);
+                            arrayArmy[i] = recluta;
+                            AplicarMiedo(i);
+                        }
+                        else 
+                        {
+
+                        }
+                    }
+                    else 
+                    {
+
+                    }
+                }
+            }
+                /*if (arrayArmy[i].GetGrafico() == 'G')
+                {
+                    if (arrayArmy[i - 1].GetGrafico() == 'R' && i != 0)
+                    {
+                        recluta = (Recluta)arrayArmy[i - 1];
+                        recluta.SetEstaAsustado(true);
+                        arrayArmy[i - 1] = recluta;
+                        Console.WriteLine("El recluta en la posicion {0}, no supera el chequeo del miedo", i - 1);
+                        Console.WriteLine("su fuerza merma a {0}", arrayArmy[i - 1].GetFuerza() / 2);
+                        arrayArmy[i - 1].SetFuerza(arrayArmy[i - 1].GetFuerza() / 2);
+                    }
+                    if (arrayArmy[i + 1].GetGrafico() == 'R' && i != arrayArmy.Length)
+                    {
+                        recluta = (Recluta)arrayArmy[i + 1];
+                        recluta.SetEstaAsustado(true);
+                        arrayArmy[i + 1] = recluta;
+                        Console.WriteLine("El recluta en la posicion {0}, no supera el chequeo del miedo", i + 1);
+                        Console.WriteLine("su fuerza merma a {0}", arrayArmy[i+1].GetFuerza() / 2);
+                        arrayArmy[i + 1].SetFuerza(arrayArmy[i + 1].GetFuerza() / 2);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No hay reclutas en el ejercito");
+                    }
+                }*/
         }
-        public void Demo()
+        public bool BuscarGeneral(Soldier[] arrayArmy,ref int posicion)
         {
-            Console.Write("sin modificador {0}", general.GetFuerza());
-            Console.Write("con modificador {0}", general.GetFuerza()*20) ;
+            for (int i = 0; i < arrayArmy.Length; i++)
+            {
+                if (arrayArmy[i].GetGrafico() == 'G')
+                {
+                    posicion = i;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void AplicarMiedo(int posicion) 
+        {
+            arrayArmy[posicion].SetFuerza(arrayArmy[posicion].GetFuerza() / 2);
         }
     }
 }
