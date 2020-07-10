@@ -11,10 +11,8 @@ namespace ArmyCreator.Avanzado
         public static void Main()
         {
             /*Probar las funciones en el main*/
-            /*Army army = new Army();
-            army.Menu();*/
-            prueba prueba = new prueba();
-            prueba.Demo();
+            Army army = new Army();
+            army.Menu();
             Console.ReadLine();
         }
         

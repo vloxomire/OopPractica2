@@ -13,6 +13,7 @@ namespace ArmyCreator.Avanzado
         protected Random random;
         public Soldier() 
         {
+            Console.WriteLine("Constructor clase Padre");//Referencia
             random = new Random();
             MostrarSaludo();
             grafico = 'S';
@@ -40,7 +41,7 @@ namespace ArmyCreator.Avanzado
         }
         public void MostrarSaludo()
         {
-            Console.WriteLine("El soladado saluda");
+            //Console.WriteLine("El soladado saluda");
         }
     }
 }

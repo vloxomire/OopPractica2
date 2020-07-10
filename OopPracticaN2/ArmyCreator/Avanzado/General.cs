@@ -8,10 +8,14 @@ namespace ArmyCreator.Avanzado
 {
     class General:Soldier
     {
-        public General() 
+        public General() : base()
         {
+
+            Console.WriteLine("Constructor General");
             grafico = 'G';
-            fuerza = random.Next(1,10);
+            Console.WriteLine("fuerza {0}", GetFuerza());
+            fuerza = fuerza * 2;
+            Console.WriteLine("Mod fuerza {0}", GetFuerza());
         }
         new public void MostrarSaludo() 
         {
@@ -20,8 +24,9 @@ namespace ArmyCreator.Avanzado
         }
         public void Insultar() 
         {
-            Console.WriteLine("Insulta");
+            //Console.WriteLine("Insulta");
         }
+        #region Getter&Setter
         new public void SetFuerza(int fuerza) 
         {
             this.fuerza = fuerza;
@@ -30,5 +35,6 @@ namespace ArmyCreator.Avanzado
         {
             return fuerza;
         }
+        #endregion
     }
 }

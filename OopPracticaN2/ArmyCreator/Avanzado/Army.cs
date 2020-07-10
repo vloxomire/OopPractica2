@@ -22,7 +22,7 @@ namespace ArmyCreator.Avanzado
             CreacionArmy();
             VerArmy();
             CalcularFuerza();
-            ChequeoMiedo();
+            recluta.Miedo(arrayArmy);
             VerArmy();
             CalcularFuerza();
         }
@@ -115,32 +115,6 @@ namespace ArmyCreator.Avanzado
             {
                 Console.Write(arrayArmy[i].GetGrafico());
                 Console.Write("-");
-            }
-        }
-        public void ChequeoMiedo()
-        {
-            //Se podra usar el objeto general o recluta para comparar?
-            for (int i = 0; i < arrayArmy.Length; i++)
-            {
-                if (arrayArmy[i].GetGrafico() == 'G')
-                {
-                    if (arrayArmy[i + 1].GetGrafico() == 'R')
-                    {
-                        recluta.Miedo(true);
-                    }
-                    if (arrayArmy[i - 1].GetGrafico() == 'R')
-                    {
-                        recluta.Miedo(true);
-                    }
-                    else
-                    {
-
-                    }
-                }
-                else
-                {
-
-                }
             }
         }
         public void Opciones(int valor)
