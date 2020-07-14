@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>FightPit.Funcional.ProgramMain</StartupObject>
+    <StartupObject>FightPit.Avanzado.ProgramMain</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -50,6 +50,13 @@
     <Compile Include="ArmyCreator\Basico\Army.cs" />
     <Compile Include="ArmyCreator\Basico\Main.cs" />
     <Compile Include="ArmyCreator\Basico\Soldier.cs" />
+    <Compile Include="FightPit\Avanzado\ArmoredFighter.cs" />
+    <Compile Include="FightPit\Avanzado\BatFighter.cs" />
+    <Compile Include="FightPit\Avanzado\BeastFighter.cs" />
+    <Compile Include="FightPit\Avanzado\BerzerkerFighter.cs" />
+    <Compile Include="FightPit\Avanzado\Fighter.cs" />
+    <Compile Include="FightPit\Avanzado\PitController.cs" />
+    <Compile Include="FightPit\Avanzado\ProgramMain.cs" />
     <Compile Include="FightPit\Funcional\ArmoredFighter.cs" />
     <Compile Include="FightPit\Basico\Fighter.cs" />
     <Compile Include="FightPit\Basico\PitController.cs" />
@@ -59,8 +66,6 @@
     <Compile Include="FightPit\Funcional\PitController.cs" />
     <Compile Include="FightPit\Funcional\ProgramMain.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FightPit\Avanzado\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
