@@ -11,11 +11,11 @@ namespace FightPit.Funcional
         private Random random;
         private bool vivo;
         private Fighter p1;
-        private ArmoredFighter armP2;
-        public PitController(Fighter fighter1,ArmoredFighter armoredFighter) 
+        private Fighter p2;
+        public PitController(Fighter fighter1,Fighter fighter2) 
         {
             this.p1 = fighter1;
-            this.armP2 = armoredFighter;
+            this.p2 = fighter2;
             random = new Random();
             vivo = true;
             do 
@@ -23,6 +23,16 @@ namespace FightPit.Funcional
                 AtacarPrimero(Iniciativa());
                 Console.ReadLine();
             } while (vivo);
+        }
+        public void SelectFighter() 
+        {
+            Console.WriteLine("Fighters:");
+            Console.WriteLine("1:fighter/2:Armored fighter/3:Berserker fighter");
+            //int valor=Convert.ToInt32(valor);
+            /*switch () 
+            {
+
+            } */
         }
         public int Iniciativa() 
         {
@@ -52,18 +62,18 @@ namespace FightPit.Funcional
             {
                 case 0:
                     Console.WriteLine("Empate:");
-                    Console.WriteLine("P1 recibe {0} de daño",armP2.GetDmg());
-                    p1.ReceiveDamage(armP2.GetDmg());
+                    Console.WriteLine("P1 recibe {0} de daño",p2.GetDmg());
+                    p1.ReceiveDamage(p2.GetDmg());
                     Console.WriteLine("P2 recibe {0} de daño", p1.GetDmg());
-                    armP2.ReceiveDamage(p1.GetDmg());
+                    p2.ReceiveDamage(p1.GetDmg());
                     break;
                 case 1:
                     //P1Ataca
                     Console.WriteLine("Player1 ataca primero");
                     Console.WriteLine("P2 recibe {0} de daño", p1.GetDmg());
-                    armP2.ReceiveDamage(p1.GetDmg());
+                    p2.ReceiveDamage(p1.GetDmg());
                     //vivo
-                    if (armP2.GetHp() <= 0)
+                    if (p2.GetHp() <= 0)
                     {
                         vivo = false;
                         Console.WriteLine("A muerto el player 2");
@@ -71,8 +81,8 @@ namespace FightPit.Funcional
                     }
                     else
                     {
-                        Console.WriteLine("P1 recibe {0} de daño", armP2.GetDmg());
-                        p1.ReceiveDamage(armP2.GetDmg());
+                        Console.WriteLine("P1 recibe {0} de daño", p2.GetDmg());
+                        p1.ReceiveDamage(p2.GetDmg());
                         if (p1.GetHp() <= 0)
                         {
                             vivo = false;
@@ -85,8 +95,8 @@ namespace FightPit.Funcional
                 case 2:
                     //P2Ataca
                     Console.WriteLine("Player2 ataca primero");
-                    Console.WriteLine("P1 recibe {0} de daño", armP2.GetDmg());
-                    p1.ReceiveDamage(armP2.GetDmg());
+                    Console.WriteLine("P1 recibe {0} de daño", p2.GetDmg());
+                    p1.ReceiveDamage(p2.GetDmg());
                     //vivo
                     if (p1.GetHp() <= 0)
                     {
@@ -97,8 +107,8 @@ namespace FightPit.Funcional
                     else
                     {
                         Console.WriteLine("P2 recibe {0} de daño", p1.GetDmg());
-                        armP2.ReceiveDamage(p1.GetDmg());
-                        if (armP2.GetHp() <= 0)
+                        p2.ReceiveDamage(p1.GetDmg());
+                        if (p2.GetHp() <= 0)
                         {
                             vivo = false;
                             Console.WriteLine("A muerto el player 1");

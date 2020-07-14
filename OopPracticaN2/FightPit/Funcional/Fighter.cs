@@ -15,15 +15,15 @@ namespace FightPit.Funcional
         public Fighter(int hp,int dmg) 
         {
             Console.WriteLine("Constructor Padre Fighter");
-            random = new Random();
+            //random = new Random();
             this.hp = 140;//random.Next(1,hp);
             this.dmg = 60;//random.Next(1,dmg);
             this.nombre = "Fighter";
-            MostrarVida();
+            //MostrarVida();
         }
         #region Getter&Setter
         public int GetHp() {return hp;}
-        public int GetDmg() {return dmg;}
+        virtual public int GetDmg() {return dmg;}
         public string GetNombre() { return nombre;}
         public void SetHp(int hp) {this.hp = hp;}
         public void SetDmg(int dmg) {this.dmg = dmg;}
@@ -52,6 +52,7 @@ namespace FightPit.Funcional
         }
         virtual public void MostrarVida()
         {
+            Console.WriteLine("Padre MostrarVida");
             Console.WriteLine("{0}:\nVida\t{1}\ndaño\t{2}"
                 ,GetNombre(),GetHp(),GetDmg());
         }

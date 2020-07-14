@@ -10,14 +10,12 @@ namespace FightPit.Funcional
     {
         private int armor;
         bool armorRota;
-        public ArmoredFighter(int armor) 
-        {
-            this.armor = armor;
-        }
-        public ArmoredFighter(int armor) : base(100,100) 
+        public ArmoredFighter(int armor,int hp,int dmg) : base(hp,dmg) 
         {
             this.armorRota = false;
             nombre = "ArmoredFighter";
+            this.armor = armor;
+            MostrarVida();
         }
         public override void ReceiveDamage(int dmg)
         {
@@ -68,8 +66,9 @@ namespace FightPit.Funcional
         }
         public override void MostrarVida()
         {
-            Console.WriteLine("{0}:\nVida\t{1}\ndaño\t{2}\nArmadura\t{3}"
-                , GetNombre(), GetHp(), GetDmg(),GetArmor());
+            Console.WriteLine("Hijo MostrarVida");
+            base.MostrarVida();
+            Console.WriteLine("Armadura\t{0}", GetArmor());
         }
     }
 }
