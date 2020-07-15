@@ -16,8 +16,8 @@ namespace FightPit.Avanzado
         public Fighter(int hp,int dmg) 
         {
             //random = new Random();
-            this.hp = 140;//random.Next(1,hp);
-            this.dmg = 60;//random.Next(1,dmg);
+            this.hp = hp;//random.Next(1,hp);
+            this.dmg = dmg;//random.Next(1,dmg);
             this.nombre = "Fighter";
             vivo = true;
         }
@@ -33,19 +33,14 @@ namespace FightPit.Avanzado
         #endregion
         public virtual void ReceiveDamage(int dmg) 
         {
-            int vida;
             //Recibe un entero que es el daño a aplicarse sobre la vida.
             SetHp(GetHp()-dmg);
-            if (GetHp() < 0)
+            if (GetHp() <= 0)
             {
-                vida = 0;
                 SetVivo(false);
+                SetHp(0);
             }
-            else 
-            {
-                vida = GetHp();
-            }
-            Console.WriteLine("Le queda {0} de vida",vida);
+            Console.WriteLine("Le queda {0} de vida", GetHp());
         }
         virtual public int Atacar() 
         {

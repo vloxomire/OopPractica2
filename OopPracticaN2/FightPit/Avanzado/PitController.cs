@@ -12,7 +12,6 @@ namespace FightPit.Avanzado
         private bool vivo;
         private Fighter p1;
         private Fighter p2;
-        private BerzerkerFighter Bf;
         public PitController(Fighter fighter1,Fighter fighter2) 
         {
             this.p1 = fighter1;
@@ -23,7 +22,7 @@ namespace FightPit.Avanzado
             {
                 SecuenciaCombate(Iniciativa());
                 Console.ReadLine();
-            } while (vivo);
+            } while (p1.GetVivo()&&p2.GetVivo());
         }
         public void SelectFighter() 
         {
@@ -71,19 +70,18 @@ namespace FightPit.Avanzado
                     AtacarP1();
                     
                     //vivo
-                    if (p2.GetHp() <= 0)
+                    if (!p2.GetVivo())
                     {
-                        vivo = false;
                         Console.WriteLine("A muerto el player 2");
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("P1 recibe {0} de daño", p2.GetDmg());
-                        p1.ReceiveDamage(p2.GetDmg());
-                        if (p1.GetHp() <= 0)
+                        int atacar=p2.Atacar();
+                        Console.WriteLine("P1 recibe {0} de daño", atacar);
+                        p1.ReceiveDamage(atacar);
+                        if (!p1.GetVivo())
                         {
-                            vivo = false;
                             Console.WriteLine("A muerto el player 1");
                             break;
                         }
