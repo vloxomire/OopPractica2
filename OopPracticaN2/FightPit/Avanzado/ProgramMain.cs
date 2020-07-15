@@ -15,7 +15,8 @@ namespace FightPit.Avanzado
             //ArmoredFighter fighter2 = new ArmoredFighter(100,100,100);
             //BeastFighter beast = new BeastFighter(100,100);
             BatFighter bat = new BatFighter(350, 100);
-            PitController pit = new PitController(fighter,bat);
+            //PitController pit = new PitController(fighter,bat);
+            TimedPitController time = new TimedPitController(2, fighter, bat);
             Console.ReadLine();
         }
         /*No se puede recibir en el main un objeto del tipo Fighter si lo maneja la clase controller*/

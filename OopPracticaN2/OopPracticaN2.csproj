@@ -57,6 +57,7 @@
     <Compile Include="FightPit\Avanzado\Fighter.cs" />
     <Compile Include="FightPit\Avanzado\PitController.cs" />
     <Compile Include="FightPit\Avanzado\ProgramMain.cs" />
+    <Compile Include="FightPit\Avanzado\TimedPitController.cs" />
     <Compile Include="FightPit\Funcional\ArmoredFighter.cs" />
     <Compile Include="FightPit\Basico\Fighter.cs" />
     <Compile Include="FightPit\Basico\PitController.cs" />

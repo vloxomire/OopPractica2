@@ -12,17 +12,14 @@ namespace FightPit.Avanzado
         private bool vivo;
         private Fighter p1;
         private Fighter p2;
+        private int contador;
         public PitController(Fighter fighter1,Fighter fighter2) 
         {
             this.p1 = fighter1;
             this.p2 = fighter2;
+            contador = 0;
             random = new Random();
             vivo = true;
-            do 
-            {
-                SecuenciaCombate(Iniciativa());
-                Console.ReadLine();
-            } while (p1.GetVivo()&&p2.GetVivo());
         }
         public void SelectFighter() 
         {
@@ -142,6 +139,23 @@ namespace FightPit.Avanzado
             {
                 Console.WriteLine("{0} esta muerto", f.GetNombre());
             }
+        }
+        public int GetContador() 
+        {
+            return contador;
+        }
+        public void SetContador(int contador) 
+        {
+            this.contador = contador;
+        }
+        virtual public void Combate()
+        {
+            do
+            {
+                SetContador(contador++);
+                SecuenciaCombate(Iniciativa());
+                Console.ReadLine();
+            } while (p1.GetVivo() && p2.GetVivo());
         }
     }
 }
