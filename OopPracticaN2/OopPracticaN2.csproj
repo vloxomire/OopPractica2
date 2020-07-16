@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>FightPit.Avanzado.ProgramMain</StartupObject>
+    <StartupObject>ArmyCreator.Basico.Pmain</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />

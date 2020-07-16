@@ -6,23 +6,18 @@ using System.Threading.Tasks;
 namespace ArmyCreator.Basico
 {
     class Army
-    { 
-        private Soldier[] arrayArmy = new Soldier[5];
+    {
+        private Soldier[] arrayArmy;
         private int posicion;
-        public Army()
+        public Army(int indice)
         {
             //inicializar army"funcion"
+            arrayArmy = new Soldier[indice];
             IniciarArmy();
         }
         private void IniciarArmy()
         {
-            int cont = 0;
-            do
-            {
-                AgregarSoldado();
-                cont++;
-            } while (cont!=arrayArmy.Length);
-            CalcularFuerza();
+            Menu();
         }
         public void AgregarSoldado()
         {
@@ -59,15 +54,25 @@ namespace ArmyCreator.Basico
         {
             return posicion;
         }
-        public void CalcularFuerza()
+        public int CalcularFuerza()
         {
-            int fuerzaArmy = 0;
             /*Devuelve la sumatoria de las fuerzas de todos los Soldiers en el army */
+            int posicion = 0;
+            int fuerzaTotal=0;
             for (int i = 0; i < arrayArmy.Length; i++)
             {
-                fuerzaArmy+=arrayArmy[i].GetFuerza();
+                if (arrayArmy[i] == null)
+                {
+                    posicion = i;
+                    break;
+                }
             }
-            Console.WriteLine("La fuerza total del ejercito es {0}", fuerzaArmy);
+            for (int j = 0; j < posicion-1; j++)
+            {
+                
+                fuerzaTotal=+arrayArmy[j].GetFuerza();
+            }
+            return fuerzaTotal;
         }
         public void VerArmy()
         {
@@ -86,6 +91,30 @@ namespace ArmyCreator.Basico
                 Console.Write(arrayArmy[i].GetGrafico());
                 Console.Write("-");
             }
+        }
+        public void Menu() 
+        {
+            int menu;
+            do
+            {
+                Console.WriteLine("opciones:\n1-Agregar soldado.\n2-Ver fuerza\n3-salir");
+                menu = Convert.ToInt32(Console.ReadLine());
+                switch (menu)
+                {
+                    case 1:
+                        AgregarSoldado();
+                        break;
+                    case 2:
+                        CalcularFuerza();
+                        Console.WriteLine("La fuerza total del ejercito es {0}",CalcularFuerza());
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        Console.WriteLine("No se a elegido ninguna de las opciones disponibles");
+                        break;
+                }
+            } while (menu>0 && menu <4);
         }
     }
 }

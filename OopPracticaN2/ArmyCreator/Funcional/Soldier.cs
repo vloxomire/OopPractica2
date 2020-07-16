@@ -10,15 +10,16 @@ namespace ArmyCreator.Funcional
     {
         private char grafico;
         private int fuerza;
-        public Soldier() 
+        private string saludo;
+        public Soldier(string saludo)
         {
-            MostrarSaludo();
             grafico = 'S';
             fuerza = 1;
+            this.saludo = saludo;
         }
-        public void VerSoldado() 
+        public void VerSoldado()
         {
-            GetFuerza();GetGrafico();
+            GetFuerza(); GetGrafico();
         }
         public void SetGrafico(char grafico)
         {
@@ -36,9 +37,13 @@ namespace ArmyCreator.Funcional
         {
             return fuerza;
         }
+        public string GetSaludo()
+        {
+            return saludo;
+        }
         public void MostrarSaludo()
         {
-            Console.WriteLine("El soladado saluda");
+            Console.WriteLine(GetSaludo());
         }
     }
 }

@@ -28,7 +28,7 @@ namespace ArmyCreator.Funcional
         {
             if (BuscarPosicion())
             {
-                arrayArmy[GetPosicion()] = new Soldier();
+                arrayArmy[GetPosicion()] = new Soldier("saludo");
             }
 
             /*Ingresa un nuevo soldado a la primera posición disponible 
