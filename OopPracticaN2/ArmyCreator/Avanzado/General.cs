@@ -8,7 +8,7 @@ namespace ArmyCreator.Avanzado
 {
     class General:Soldier
     {
-        public General() : base()
+        public General(string saludo) : base(saludo)
         {
 
             Console.WriteLine("Constructor General");
@@ -17,14 +17,15 @@ namespace ArmyCreator.Avanzado
             fuerza = fuerza * 2;
             Console.WriteLine("Mod fuerza {0}", GetFuerza());
         }
-        new public void MostrarSaludo() 
+        public override void MostrarSaludo() 
         {
             base.MostrarSaludo();
             Insultar();
         }
-        public void Insultar() 
+        private void Insultar() 
         {
-            //Console.WriteLine("Insulta");
+            Console.WriteLine("Insulta");
+
         }
         #region Getter&Setter
         new public void SetFuerza(int fuerza) 

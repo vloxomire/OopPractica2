@@ -15,7 +15,7 @@ namespace ArmyCreator.Avanzado
         public Army()
         {
             arrayArmy = new Soldier[indice];
-            recluta = new Recluta();
+            recluta = new Recluta("hola");
         }
         public void Menu()
         {
@@ -48,7 +48,7 @@ namespace ArmyCreator.Avanzado
             if (BuscarPosicion())
             {
                 //No puedo sumar el valor del getposition +1
-                arrayArmy[GetPosicion()] = new Soldier();
+                arrayArmy[GetPosicion()] = new Soldier("hola");
                 Console.WriteLine("Asignado a la posicion {0}", GetPosicion());
             }
         }
@@ -56,7 +56,7 @@ namespace ArmyCreator.Avanzado
         {
             if (BuscarPosicion())
             {
-                arrayArmy[GetPosicion()] = new Recluta();
+                arrayArmy[GetPosicion()] = new Recluta("hola");
                 Console.WriteLine("Asignado a la posicion {0}", GetPosicion());
             }
         }
@@ -64,7 +64,7 @@ namespace ArmyCreator.Avanzado
         {
             if (BuscarPosicion())
             {
-                arrayArmy[GetPosicion()] = new General();
+                arrayArmy[GetPosicion()] = new General("saludo");
                 Console.WriteLine("Asignado a la posicion {0}", GetPosicion());
             }
         }
@@ -140,63 +140,26 @@ namespace ArmyCreator.Avanzado
         }
         public void Miedo(Soldier[] arrayArmy)
         {
-            int posicionGrl = 0;
-            if (BuscarGeneral(arrayArmy, ref posicionGrl)) 
+            for (int i = 0; i < arrayArmy.Length; i++)
             {
-                for (int i = 0; i < arrayArmy.Length; i++)
+                if (arrayArmy[i].GetGrafico()=='G') 
                 {
-                    if (arrayArmy[i].GetGrafico() == 'R')
+                    if (i - 1 >= 0)
                     {
-                        if (i + 1 == posicionGrl)
+                        if (arrayArmy[i - 1].GetGrafico() == 'R')
                         {
-                            recluta = (Recluta)arrayArmy[i];
-                            recluta.SetEstaAsustado(true);
-                            arrayArmy[i] = recluta;
-                            AplicarMiedo(i);
-                        }
-                        else if (i - 1 == posicionGrl)
-                        {
-                            recluta = (Recluta)arrayArmy[i];
-                            recluta.SetEstaAsustado(true);
-                            arrayArmy[i] = recluta;
-                            AplicarMiedo(i);
-                        }
-                        else 
-                        {
-
+                            ((Recluta)arrayArmy[i - 1]).SetEstaAsustado(true);
                         }
                     }
-                    else 
+                    else if(i+1<=arrayArmy.Length)
                     {
-
+                        if (arrayArmy[i + 1].GetGrafico() == 'R')
+                        {
+                            ((Recluta)arrayArmy[i + 1]).SetEstaAsustado(true);
+                        }
                     }
                 }
             }
-                /*if (arrayArmy[i].GetGrafico() == 'G')
-                {
-                    if (arrayArmy[i - 1].GetGrafico() == 'R' && i != 0)
-                    {
-                        recluta = (Recluta)arrayArmy[i - 1];
-                        recluta.SetEstaAsustado(true);
-                        arrayArmy[i - 1] = recluta;
-                        Console.WriteLine("El recluta en la posicion {0}, no supera el chequeo del miedo", i - 1);
-                        Console.WriteLine("su fuerza merma a {0}", arrayArmy[i - 1].GetFuerza() / 2);
-                        arrayArmy[i - 1].SetFuerza(arrayArmy[i - 1].GetFuerza() / 2);
-                    }
-                    if (arrayArmy[i + 1].GetGrafico() == 'R' && i != arrayArmy.Length)
-                    {
-                        recluta = (Recluta)arrayArmy[i + 1];
-                        recluta.SetEstaAsustado(true);
-                        arrayArmy[i + 1] = recluta;
-                        Console.WriteLine("El recluta en la posicion {0}, no supera el chequeo del miedo", i + 1);
-                        Console.WriteLine("su fuerza merma a {0}", arrayArmy[i+1].GetFuerza() / 2);
-                        arrayArmy[i + 1].SetFuerza(arrayArmy[i + 1].GetFuerza() / 2);
-                    }
-                    else
-                    {
-                        Console.WriteLine("No hay reclutas en el ejercito");
-                    }
-                }*/
         }
         public bool BuscarGeneral(Soldier[] arrayArmy,ref int posicion)
         {
@@ -209,10 +172,6 @@ namespace ArmyCreator.Avanzado
                 }
             }
             return false;
-        }
-        public void AplicarMiedo(int posicion) 
-        {
-            arrayArmy[posicion].SetFuerza(arrayArmy[posicion].GetFuerza() / 2);
         }
     }
 }

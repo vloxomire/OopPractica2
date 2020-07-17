@@ -86,6 +86,12 @@ namespace ArmyCreator.Funcional
                 Console.Write(arrayArmy[i].GetGrafico());
                 Console.Write("-");
             }
+            Console.WriteLine();
+            for (int i = 0; i < arrayArmy.Length; i++)
+            {
+                Console.Write(arrayArmy[i].GetSaludo());
+                Console.Write("-");
+            }
         }
     }
 }

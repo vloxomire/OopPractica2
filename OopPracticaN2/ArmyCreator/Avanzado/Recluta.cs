@@ -10,7 +10,7 @@ namespace ArmyCreator.Avanzado
     class Recluta:Soldier
     {
         private bool estaAsustado;
-        public Recluta() : base()
+        public Recluta(string saludo) : base(saludo)
         {
             Console.WriteLine("Constructor recluta");
             estaAsustado = false;
@@ -18,6 +18,7 @@ namespace ArmyCreator.Avanzado
             //Console.WriteLine("fuerza {0}", GetFuerza());
             fuerza =fuerza / 2;
             //Console.WriteLine("Mod fuerza {0}",GetFuerza());
+            Console.WriteLine(GetFuerza());
         }
         #region Getter&Setter
         public void SetEstaAsustado(bool asustado)
@@ -28,9 +29,17 @@ namespace ArmyCreator.Avanzado
         {
             this.fuerza = fuerza;
         }
-        new public int GetFuerza()
+        public override int GetFuerza()
         {
-            return fuerza;
+            if (GetEstaAsustado())
+            {
+                return fuerza / 2;
+            }
+            else 
+            {
+                return fuerza;
+            }
+            
         }
         public bool GetEstaAsustado()
         {

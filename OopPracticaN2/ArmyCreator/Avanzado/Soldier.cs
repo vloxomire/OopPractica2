@@ -11,17 +11,19 @@ namespace ArmyCreator.Avanzado
         protected char grafico;
         protected int fuerza;
         protected Random random;
-        public Soldier() 
+        protected string saludo;
+        public Soldier(string saludo) 
         {
             Console.WriteLine("Constructor clase Padre");//Referencia
             random = new Random();
             MostrarSaludo();
             grafico = 'S';
             fuerza = random.Next(50,100);
+            this.saludo=saludo;
         }
-        public void VerSoldado() 
+        public void VerSoldado()
         {
-            GetFuerza();GetGrafico();
+            GetFuerza(); GetGrafico(); MostrarSaludo();
         }
         public void SetGrafico(char grafico)
         {
@@ -35,13 +37,14 @@ namespace ArmyCreator.Avanzado
         {
             return grafico;
         }
-        public int GetFuerza()
+        public virtual int GetFuerza()
         {
             return fuerza;
         }
-        public void MostrarSaludo()
+        public virtual void MostrarSaludo()
         {
             //Console.WriteLine("El soladado saluda");
+            Console.WriteLine("saludo");
         }
     }
 }
