@@ -8,66 +8,47 @@ namespace FightPit.Funcional
 {
     class ArmoredFighter:Fighter
     {
-        private int armor;
-        bool armorRota;
+        public int Armor {get;set;}
+        public bool ArmorRota {get;set;}
         public ArmoredFighter(int armor,int hp,int dmg) : base(hp,dmg) 
         {
-            this.armorRota = false;
-            nombre = "ArmoredFighter";
-            this.armor = armor;
-            nombre = "Armored";
-            MostrarVida();
+            ArmorRota = false;
+            Armor = armor;
+            Nombre = "Armored";
         }
         public override void ReceiveDamage(int dmg)
         {
             QuitarArmor(dmg);
-        
         }
         public void QuitarArmor(int dmg)
         {
-            if (armorRota)
+            if (ArmorRota)
             {
                 base.ReceiveDamage(dmg);
             }
             else 
             {
-                SetArmor(GetArmor() - dmg);
-                if (GetArmor() < 0)
+                Armor=Armor - dmg;
+                if (Armor < 0)
                 {
                     Console.WriteLine("Daño traspasado {0}", DañoTraspasado(dmg));
-                    SetHp(GetHp()+GetArmor());
-                    SetArmor(0);
-                    Console.WriteLine("Vida {0}",GetHp());
+                    Hp=Hp+Armor;
+                    Armor=0;
+                    Console.WriteLine("Vida {0}",Hp);
                 }
                 else 
                 {
                     Console.WriteLine("La armadura redujo el daño");
-                    Console.WriteLine("Armadura restante {0}", GetArmor());
+                    Console.WriteLine("Armadura restante {0}", Armor);
                 }
             }
         }
-        #region Getter&Setter
-        public int GetArmor()
-        {
-            return armor;
-        }
-        public void SetArmor(int armor) 
-        {
-            this.armor = armor;
-        }
-        #endregion
         private int DañoTraspasado(int dmg)
         {
             int dmgSobrante = 0;
-            dmgSobrante=GetArmor();
-            armorRota = true;
+            dmgSobrante=Armor;
+            ArmorRota = true;
             return dmgSobrante;
-        }
-        public override void MostrarVida()
-        {
-            base.MostrarVida();
-            Console.WriteLine("Armadura\t{0}", GetArmor());
-            Console.WriteLine("********************");
         }
     }
 }

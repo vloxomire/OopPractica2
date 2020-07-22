@@ -9,35 +9,37 @@ namespace FightPit.Basico
     class PitController
     {
         private Random random;
-        private bool vivo;
         private Fighter p1;
         private Fighter p2;
-        public PitController(Fighter fighter1,Fighter fighter2) 
+        public PitController(Fighter fighter1, Fighter fighter2)
         {
+            int contador = 1;
             this.p1 = fighter1;
             this.p2 = fighter2;
             random = new Random();
-            vivo = true;
-            do 
+            do
             {
-                MostrarVida();
+                Console.WriteLine("Ronda {0}", contador);
+                MostrarVida(fighter1, fighter2);
                 AtacarPrimero(Iniciativa());
+                contador++;
                 Console.ReadLine();
-            } while (vivo);
+            } while (p1.Vivo && p2.Vivo);
         }
-        public int Iniciativa() 
+        private int Iniciativa()
         {
-            Console.WriteLine("Iniciativa");
-            int player1=random.Next(1, 10);
-            Console.WriteLine("p1 ini {0}",player1);
+            Console.WriteLine("Inicio del combate");
+            int player1 = random.Next(1, 10);
+            Console.WriteLine("{0}1 ini {1}", p1.Nombre, player1);
             int player2 = random.Next(1, 10);
-            Console.WriteLine("p2 ini {0}", player2);
+            Console.WriteLine("{0}2 ini {1}", p1.Nombre, player2);
+            Console.WriteLine("***********");
 
             if (player1 > player2)
             {
                 return 1;
             }
-            else if (player1 == player2) 
+            else if (player1 == player2)
             {
                 return 0;
             }
@@ -46,75 +48,79 @@ namespace FightPit.Basico
                 return 2;
             }
         }
-        public void AtacarPrimero(int valor) 
+        private void AtacarPrimero(int valor)
         {
-            Console.WriteLine("AtacarPrimero");
             switch (valor)
             {
                 case 0:
-                    Console.WriteLine("Empate:");
-                    Console.WriteLine("P1 recibe {0} de daño",p2.GetDmg());
-                    p1.ReceiveDamage(p2.GetDmg());
-                    Console.WriteLine("P2 recibe {0} de daño", p1.GetDmg());
-                    p2.ReceiveDamage(p1.GetDmg());
+                    Empate();
                     break;
                 case 1:
-                    //P1Ataca
-                    Console.WriteLine("Player1 ataca primero");
-                    Console.WriteLine("P2 recibe {0} de daño", p1.GetDmg());
-                    p2.ReceiveDamage(p1.GetDmg());
-                    //vivo
-                    if (p2.GetHp() <= 0)
+                    P1Ataca();
+                    EstaVivo(p2);
+                    if (!p2.Vivo)
                     {
-                        vivo = false;
-                        Console.WriteLine("A muerto el player 2");
-                        break;
+                        return;
                     }
-                    else
-                    {
-                        Console.WriteLine("P1 recibe {0} de daño", p2.GetDmg());
-                        p1.ReceiveDamage(p2.GetDmg());
-                        if (p1.GetHp() <= 0)
-                        {
-                            vivo = false;
-                            Console.WriteLine("A muerto el player 2");
-                            break;
-                        }
-                        else { }
-                    }
+                    P2Ataca();
+                    EstaVivo(p1);
                     break;
                 case 2:
-                    //P2Ataca
-                    Console.WriteLine("Player2 ataca primero");
-                    Console.WriteLine("P1 recibe {0} de daño", p2.GetDmg());
-                    p1.ReceiveDamage(p2.GetDmg());
-                    //vivo
-                    if (p1.GetHp() <= 0)
+                    P2Ataca();
+                    EstaVivo(p1);
+                    if (!p1.Vivo)
                     {
-                        vivo = false;
-                        Console.WriteLine("A muerto el player 1");
-                        break;
+                        return;
                     }
-                    else
-                    {
-                        Console.WriteLine("P2 recibe {0} de daño", p1.GetDmg());
-                        p2.ReceiveDamage(p1.GetDmg());
-                        if (p2.GetHp() <= 0)
-                        {
-                            vivo = false;
-                            Console.WriteLine("A muerto el player 1");
-                            break;
-                        }
-                        else { }
-                    }
+                    P1Ataca();
+                    EstaVivo(p2);
                     break;
                 default:
                     break;
             }
         }
-        public void MostrarVida() 
+        private void MostrarVida(Fighter f1, Fighter f2)
         {
-            Console.WriteLine("Vida Player 1 {0} \nVidaPlayer 2 {1}",p1.GetHp(),p2.GetHp());
+            Console.WriteLine("Player1:\n{0}", f1.Nombre);
+            Console.WriteLine("Vida:{0}\nDaño:{1}", f1.Hp, f1.Dmg);
+            Console.WriteLine("**************");
+            Console.WriteLine("Player2:\n{0}", f2.Nombre);
+            Console.WriteLine("Vida:{0}\nDaño:{1}", f2.Hp, f2.Dmg);
+            Console.WriteLine("**************");
+        }
+        private void Empate()
+        {
+            Console.WriteLine("Empate:");
+            P1Ataca();
+            P2Ataca();
+            //Chequeo si alguno quedo vivo
+            Console.WriteLine("Player 1:");
+            EstaVivo(p1);
+            Console.WriteLine("Player 2:");
+            EstaVivo(p2);
+        }
+        private void P1Ataca()
+        {
+            Console.WriteLine("{0}1 ataca", p1.Nombre);
+            Console.WriteLine("{0}2 recibe {1} de daño", p2.Nombre, p1.Dmg);
+            p2.ReceiveDamage(p1.Dmg);
+        }
+        private void P2Ataca()
+        {
+            Console.WriteLine("{0}2 ataca", p2.Nombre);
+            Console.WriteLine("{0}1 recibe {1} de daño", p1.Nombre, p2.Dmg);
+            p1.ReceiveDamage(p2.Dmg);
+        }
+        private void EstaVivo(Fighter f)
+        {
+            //Con solo saber la vida que tiene ya lo puedo manejar
+            //Early?
+            if (f.Hp > 0)
+            {
+                return;
+            }
+            f.Vivo = false;
+            Console.WriteLine("{0} a muerto", f.Nombre);
         }
     }
 }

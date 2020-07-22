@@ -9,43 +9,42 @@ namespace FightPit.Basico
     class Fighter
     {
         private int hp;
+        public int Hp { get { return hp; } set { hp = value; } }
         private int dmg;
+        public int Dmg{get{return dmg;}set{dmg=value;}}
         private Random random;
+        private string nombre;
+        public string Nombre {get { return nombre; }set { nombre = value; }}
+        private bool vivo;
+        public bool Vivo {get{ return vivo; }set{ vivo = value; } }
+        private int semilla=(int)DateTime.Now.Millisecond;//Semilla para random
         public Fighter(int hp,int dmg) 
         {
-            Console.WriteLine("Constructor Fighter");
-            random = new Random();
-            this.hp = random.Next(1,hp);
-            Console.WriteLine("Hp {0}", GetHp()) ;
-            this.dmg = random.Next(1,dmg);
-            Console.WriteLine("Dmg {0}",GetDmg());
+            nombre="Luchador";
+            random = new Random(semilla);
+            this.hp = random.Next(1,hp)+25;
+            this.dmg = random.Next(1,dmg)+25;
+            this.vivo = true;
         }
-        #region Getter&Setter
-        public int GetHp() {return hp;}
-        public int GetDmg() {return dmg;}
-        public void SetHp(int hp) {this.hp = hp;}
-        public void SetDmg(int dmg) {this.dmg = dmg;}
-        #endregion
         public void ReceiveDamage(int dmg) 
         {
             int vida;
             //Recibe un entero que es el daño a aplicarse sobre la vida.
-            SetHp(GetHp()-dmg);
-            if (GetHp() < 0)
+            Hp=Hp-dmg;
+            if (Hp < 0)
             {
                 vida = 0;
             }
             else 
             {
-                vida = GetHp();
+                vida = Hp;
             }
             Console.WriteLine("Vida restante {0}",vida);
         }
         public void Attack() 
         {
             //Devuelve el dmg generado
-            Console.WriteLine(GetDmg());
-            GetDmg();
+            Console.WriteLine(Dmg);
         }
     }
 }

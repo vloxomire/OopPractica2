@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,54 +9,40 @@ namespace FightPit.Funcional
 {
     class Fighter
     {
-        protected int hp;
-        protected int dmg;
-        protected string nombre;
-        protected bool vivo;
+        public int Hp { get; set; }
+        public int Dmg { get; set; }
+        public string Nombre { get; set; }
+        public bool Vivo { get; set; }
+
+        private int semilla = (int)DateTime.Now.Millisecond;//Semilla para random
         protected Random random;
         public Fighter(int hp,int dmg) 
         {
-            //random = new Random();
-            this.hp = 140;//random.Next(1,hp);
-            this.dmg = 60;//random.Next(1,dmg);
-            this.nombre = "Fighter";
-            vivo = true;
+            random = new Random(semilla);
+            Hp = random.Next(1,hp)+140;
+            Dmg = random.Next(1,dmg)+60;
+            Nombre = "Fighter";
+            Vivo = true;
         }
-        #region Getter&Setter
-        public int GetHp() {return hp;}
-        virtual public int GetDmg() {return dmg;}
-        public string GetNombre() { return nombre;}
-        public bool GetVivo() { return vivo; }
-        public void SetHp(int hp) {this.hp = hp;}
-        public void SetDmg(int dmg) {this.dmg = dmg;}
-        public void SetNombre(string nombre) {this.nombre=nombre; }
-        public void SetVivo(bool vivo) { this.vivo=vivo; }
-        #endregion
         public virtual void ReceiveDamage(int dmg) 
         {
             int vida;
             //Recibe un entero que es el daño a aplicarse sobre la vida.
-            SetHp(GetHp()-dmg);
-            if (GetHp() < 0)
+            Hp = Hp - dmg;
+            if (Hp < 0)
             {
                 vida = 0;
-                SetVivo(false);
             }
-            else 
+            else
             {
-                vida = GetHp();
+                vida = Hp;
             }
-            Console.WriteLine("Le queda {0} de vida",vida);
+            Console.WriteLine("Vida restante {0}", vida);
         }
         virtual public int Atacar() 
         {
             //Devuelve el dmg generado
-            return GetDmg();
-        }
-        virtual public void MostrarVida()
-        {
-            Console.WriteLine("{0}:\nVida\t{1}\ndaño\t{2}"
-                ,GetNombre(),GetHp(),GetDmg());
+            return Dmg;
         }
     }
 }
