@@ -20,8 +20,8 @@ namespace FightPit.Funcional
             do
             {
                 Console.WriteLine("Ronda {0}", contador);
-                MostrarVida(fighter1, fighter2);
-                SecuenciaCombate(Iniciativa());
+                MostrarVida(fighter1); MostrarVida(fighter2);
+                SecuenciaCombate(Iniciativa(),p1,p2);
                 contador++;
                 Console.ReadLine();
             }while(p1.Vivo && p2.Vivo);
@@ -53,59 +53,67 @@ namespace FightPit.Funcional
                 return 2;
             }
         }
-        private void SecuenciaCombate(int valor)
+        private void SecuenciaCombate(int valor,Fighter f1, Fighter f2)
         {
             switch (valor)
             {
                 case 0:
-                    Empate();
+                    Empate(f1,f2);
                     break;
                 case 1:
-                    P1Ataca();
+                    Ataca(f1,f2);
                     EstaVivo(p2);
                     if (!p2.Vivo)
                     {
                         return;
                     }
-                    P2Ataca();
-                    EstaVivo(p1);
-                    break;
-                case 2:
-                    P2Ataca();
+                    Ataca(f2,f1);
                     EstaVivo(p1);
                     if (!p1.Vivo)
                     {
                         return;
                     }
-                    P1Ataca();
+                    break;
+                case 2:
+                    Ataca(f2,f1);
+                    EstaVivo(p1);
+                    if (!p1.Vivo)
+                    {
+                        return;
+                    }
+                    Ataca(f1,f2);
                     EstaVivo(p2);
+                    if (!p2.Vivo)
+                    {
+                        return;
+                    }
                     break;
                 default:
                     break;
             }
         }
-        private void P1Ataca()
+        private void Ataca(Fighter f1,Fighter f2)
         {
-            Console.WriteLine("{0}1 ataca", p1.Nombre);
-            Console.WriteLine("{0}2 recibe {1} de daño", p2.Nombre, p1.Dmg);
-            p2.ReceiveDamage(p1.Dmg);
+            //BerzerkerFighter b = new BerzerkerFighter(3.5f, 60.8f, 100, 50);
+            //if (f==b)
+            Console.WriteLine("{0} ataca", f1.Nombre);
+            //if (f1.Nombre == "Berzerker")
+            if(f1 is BerzerkerFighter)
+            {
+                ((BerzerkerFighter)f1).Probabilidad(f1.Dmg);
+            }
+            Console.WriteLine("{0} recibe {1} de daño", f2.Nombre, f1.Dmg);
+            f2.ReceiveDamage(f1.Dmg);
         }
-        private void P2Ataca()
-        {
-            Console.WriteLine("{0}2 ataca", p2.Nombre);
-            Console.WriteLine("{0}1 recibe {1} de daño", p1.Nombre, p2.Dmg);
-            p1.ReceiveDamage(p2.Dmg);
-        }
-        private void Empate()
+        private void Empate(Fighter f1,Fighter f2)
         {
             Console.WriteLine("Empate:");
-            P1Ataca();
-            P2Ataca();
+            Ataca(f1,f2); Ataca(f2,f1);
             //Chequeo si alguno quedo vivo
             Console.WriteLine("Player 1:");
-            EstaVivo(p1);
+            EstaVivo(f1);
             Console.WriteLine("Player 2:");
-            EstaVivo(p2);
+            EstaVivo(f2);
         }
         private void EstaVivo(Fighter f)
         {
@@ -116,31 +124,26 @@ namespace FightPit.Funcional
             f.Vivo = false;
             Console.WriteLine("{0} a muerto", f.Nombre);
         }
-        private void MostrarVida(Fighter f1, Fighter f2)
+        private void MostrarVida(Fighter f)
         {
             //Puede que con un solo objeto ya modifique todo
-            Console.WriteLine("Player1:\n{0}", f1.Nombre);
-            Console.WriteLine("Vida:{0}\nDaño:{1}", f1.Hp, f1.Dmg);
-            Console.WriteLine("**************");
-            Console.WriteLine("Player2:\n{0}", f2.Nombre);
-            Console.WriteLine("Vida:{0}\nDaño:{1}", f2.Hp, f2.Dmg);
-            Console.WriteLine("**************");
+            Console.WriteLine("Player:\n{0}", f.Nombre);
+            Console.WriteLine("Vida:{0}\nDaño:{1}", f.Hp, f.Dmg);
 
-            switch (f1.Nombre)
+            string nombre=f.Nombre;
+            switch (nombre)
             {
-                case "Berserker":
-                    BerzerkerFighter c1 = (BerzerkerFighter)f1;
-                    Console.WriteLine("probabilidad de critico:\t{0}", f1.Porcetaje);
-                    Console.WriteLine("Critico:\t{0}", (BerzerkerFighter)f1.Modificador);
+                case "Berzerker":
+                    Console.WriteLine("probabilidad de critico:\t{0}", ((BerzerkerFighter)f).Porcentaje);
+                    Console.WriteLine("Critico:\t{0}", ((BerzerkerFighter)f).Modificador);
                     Console.WriteLine("********************");
                     break;
-                case "Fighter":
-                    break;
                 case "Armored":
-                    Console.WriteLine("Armadura\t{0}", (ArmoredFighter)f1.Armor);
+                    Console.WriteLine("Armadura\t{0}", ((ArmoredFighter)f).Armor);
                     Console.WriteLine("********************");
                     break;
                 default:
+                    Console.WriteLine("********************");
                     break;
             }
         }

@@ -13,13 +13,14 @@ namespace FightPit.Funcional
           multiplicado por el modificador*/
         public float Modificador { get; set; }
         public float Porcentaje { get; set; }
+
         public BerzerkerFighter(float modificador,float porcentaje,int hp,int dmg):base(hp,dmg) 
         {
             Modificador = modificador;
             Porcentaje = porcentaje;
             Nombre = "Berzerker";
         }
-        public float probabilidad(int dmg) 
+        public float Probabilidad(int dmg) 
         {
             Random random = new Random();
             float probabilidad=random.Next(1, 100);
@@ -36,10 +37,6 @@ namespace FightPit.Funcional
             {
                 return (float)dmg;
             }
-        }
-        public override int Atacar() 
-        {
-            return (int)probabilidad(Dmg);
         }
     }
 }
